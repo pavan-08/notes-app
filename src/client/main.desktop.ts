@@ -13,7 +13,7 @@ let template: any;
 let menu: any;
 
 // app
-import { AppConfig } from './app/frameworks/sample/services/app-config';
+import { DesktopConfig } from './app/modules/electron/index';
 
 // Sample
 // You would need a valid `submitURL` to use
@@ -57,7 +57,7 @@ app.on('ready', () => {
     label: 'Language',
     submenu: []
   };
-  for (var lang of AppConfig.SUPPORTED_LANGUAGES) {
+  for (var lang of DesktopConfig.GET_SUPPORTED_LANGUAGES()) {
     let code = lang.code;
     let langOption = {
       label: lang.title,
@@ -177,7 +177,7 @@ app.on('ready', () => {
           label: 'Reload',
           accelerator: 'Command+R',
           click:() => {
-            mainWindow.restart();
+            mainWindow.reload();
           }
         }, {
             label: 'Toggle Full Screen',
@@ -239,7 +239,7 @@ app.on('ready', () => {
           label: '&Reload',
           accelerator: 'Ctrl+R',
           click:() => {
-            mainWindow.restart();
+            mainWindow.reload();
           }
         }, {
             label: 'Toggle &Full Screen',
