@@ -1,0 +1,9 @@
+<h2>LOGIN</h2>
+<form (submit)="login()" id="login">
+  <label>Email ID</label><br/>
+  <input  [(ngModel)]="email" type="email" name="email" placeholder="Enter email ID"/><br/>
+  <label>Password</label><br/>
+  <input  [(ngModel)]="password" type="password" name="password" placeholder="Enter password"/><br/>
+  <button type="submit">SIGN IN</button><br/>
+  <span class="err">{{error}}</span>
+</form>

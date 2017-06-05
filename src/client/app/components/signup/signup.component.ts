@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 // app
-import { RouterExtensions } from '../../modules/core/index';
+import { RouterExtensions, StorageService, StorageKey } from '../../modules/core/index';
 import { UserService } from '../../modules/notes-app/index';
 
 @Component({
@@ -49,9 +49,18 @@ export class SignupComponent implements OnInit {
 			error: ''
 		}
 	];
-	constructor(private userService: UserService){}
+	constructor(
+		private userService: UserService,
+		private storage: StorageService,
+		private routerext: RouterExtensions
+		){}
 
-	ngOnInit() {}
+	ngOnInit() {
+		if(this.storage.getItem(StorageKey['USERNAME']) !== null
+		&& this.storage.getItem(StorageKey['PASSWORD']) !== null){
+			this.goToHome();
+		}
+	}
 
 	validate(): boolean {
 		for(var i=0; i<this.form.length; i++) {
@@ -78,13 +87,32 @@ export class SignupComponent implements OnInit {
 		if(this.validate()) {
 			this.userService.signUp(this.form[1].value, this.form[2].value, this.form[0].value)
 					.subscribe(res => {
-						console.log(res);
-						//redirect to home
+						this.storage.setItem(StorageKey['USERNAME'], res.email);
+						this.storage.setItem(StorageKey['PASSWORD'], this.form[2].value);
+						this.goToHome();
 					},
 					err => {
 						this.error = JSON.parse(err._body).message;
 					});
 		}
 		return false;
+	}
+
+	goToHome() {
+		this.routerext.navigate(['/home'], {
+	      transition: {
+	        duration: 1000,
+	        name: 'slideTop',
+	      }
+	    });
+	}
+
+	login() {
+		this.routerext.navigate(['/login'], {
+	      transition: {
+	        duration: 1000,
+	        name: 'slideTop',
+	      }
+	    });	
 	}
 }

@@ -6,7 +6,7 @@
 h2 {
 	text-align:center;
 }
-form#signup {
+form#login {
 	width: 250px;
 	margin: auto;
 	input, button[type="submit"] {
@@ -19,12 +19,5 @@ form#signup {
 	}
 	span.err {
 		color: red;
-	}
-	a {
-		cursor: pointer;
-		color: blue;
-		&:hover {
-			text-decoration: underline;
-		}
 	}
 }

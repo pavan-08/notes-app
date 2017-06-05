@@ -1,12 +1,9 @@
 // libs
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 // app
-import { RouterExtensions, Config } from '../../modules/core/index';
-import { IAppState, getNames } from '../../modules/ngrx/index';
-import { NameList } from '../../modules/sample/index';
+import { RouterExtensions, StorageService, StorageKey } from '../../modules/core/index';
 
 @Component({
   moduleId: module.id,
@@ -15,34 +12,24 @@ import { NameList } from '../../modules/sample/index';
   styleUrls: ['home.component.css']
 })
 export class HomeComponent implements OnInit {
-  public names$: Observable<any>;
-  public newName: string;
+  
+  public passphrase: string;
 
-  constructor(private store: Store<IAppState>, public routerext: RouterExtensions) {}
+  constructor(
+    private routerext: RouterExtensions,
+    private storage: StorageService
+    ){}
 
   ngOnInit() {
-    this.names$ = this.store.let(getNames);
-    this.newName = '';
+    this.passphrase = '';
   }
 
-  /*
-   * @param newname  any text as input.
-   * @returns return false to prevent default form submit behavior to refresh the page.
-   */
-  addName(): boolean {
-    this.store.dispatch(new NameList.AddAction(this.newName));
-    this.newName = '';
+  setPassphrase(): boolean {
+    this.passphrase = this.passphrase.trim();
+    if(this.passphrase !== '') {
+      this.storage.setItem(StorageKey['PASSPHRASE'], this.passphrase);
+      //this.routerext.navigate([''])
+    }
     return false;
-  }
-
-  readAbout() {
-    // Try this in the {N} app
-    // {N} can use these animation options
-    this.routerext.navigate(['/about'], {
-      transition: {
-        duration: 1000,
-        name: 'slideTop',
-      }
-    });
   }
 }

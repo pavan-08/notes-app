@@ -1,23 +1,6 @@
-<h2>
-  {{ 'LOVE_TECH' | translate }} <div class="smile"></div>
-</h2>
-
-<p>
-  {{'ABOUT_REWARD' | translate}}
-</p>
-<p>
-  {{'ABOUT_ADD' | translate}}
-</p>
-
-<form (submit)="addName()">
-  <input [(ngModel)]="newName" name="newName" [placeholder]="'INPUT_HINT' | translate">
-  <button type="submit">{{'ADD_BTN_TEXT' | translate}}</button>
+<form (submit)="setPassphrase()">
+	<label>Passphrase</label><br/>
+	<input type="password" name="psasphrase" placeholder="Enter passphrase"/><br/>
+	<button type="submit">Secure Login</button><br/>
+	<p>We will use this passphrase to generate highly encrypted notes. Your passphrase is stored nowhere on our servers. Remember your passphrase always as there is no way to recover the notes if you forget your passphrase.</p>
 </form>
-
-<ul>
-  <li *ngFor="let name of (names$ | async)">{{name}}</li>
-</ul>
-
-<p>
-  <a class="link" (click)="readAbout()">About - RouterExtensions example</a>
-</p>

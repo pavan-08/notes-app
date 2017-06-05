@@ -1,8 +1,10 @@
 import { HomeComponent } from './home.component';
+import { RouteGuardService } from '../../modules/notes-app/index';
 
 export const HomeRoutes: Array<any> = [
   {
-    path: '',
-    component: HomeComponent
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [RouteGuardService]
   }
 ];

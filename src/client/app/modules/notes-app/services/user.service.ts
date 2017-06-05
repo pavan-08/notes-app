@@ -6,7 +6,7 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 // app
-import { Config } from '../../core/index';
+import { Config, StorageService, StorageKey } from '../../core/index';
 
 // module
 import { AuthService } from './auth.service';
@@ -18,7 +18,8 @@ export class UserService {
 
   constructor(
     private http: Http,
-    private auth: AuthService
+    private auth: AuthService,
+    private storage: StorageService
   ) {}
 
   signUp(email: string, password: string, name: string): Observable<any> {
@@ -38,6 +39,11 @@ export class UserService {
   }
 
   login(): Observable<any> {
-  	return null;
+  	return this.auth.getAccessToken();
+  }
+
+  isLoggedIn(): boolean {
+    return this.storage.getItem(StorageKey['USERNAME']) !== null
+      && this.storage.getItem(StorageKey['PASSWORD']) !== null;
   }
 }
