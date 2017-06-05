@@ -1,0 +1,23 @@
+:host {
+  display: block;
+  padding: 0 16px;
+}
+
+h2 {
+	text-align:center;
+}
+form#signup {
+	width: 250px;
+	margin: auto;
+	input, button[type="submit"] {
+		width: 100%;
+		margin: 5px 0 5px 0;
+	}
+	label {
+		font-weight: bold;
+		color: black;
+	}
+	span.err {
+		color: red;
+	}
+}

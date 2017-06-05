@@ -20,7 +20,8 @@ import { WindowService, StorageService, ConsoleService, createConsoleTarget, pro
 import { CoreModule, Config } from './app/modules/core/index';
 import { AnalyticsModule } from './app/modules/analytics/index';
 import { MultilingualModule, Languages, translateLoaderFactory, MultilingualEffects } from './app/modules/i18n/index';
-import { SampleModule, SampleEffects } from './app/modules/sample/index';
+//import { SampleModule, SampleEffects } from './app/modules/sample/index';
+import { NotesAppModule, NotesEffects } from './app/modules/notes-app/index';
 import { AppReducer } from './app/modules/ngrx/index';
 
 // config
@@ -79,11 +80,13 @@ if (String('<%= BUILD_TYPE %>') === 'dev') {
       deps: [Http],
       useFactory: (translateLoaderFactory)
     }]),
-    SampleModule,
+    //SampleModule,
+    NotesAppModule,
     // configure app state
     StoreModule.provideStore(AppReducer),
     EffectsModule.run(MultilingualEffects),
-    EffectsModule.run(SampleEffects),
+    //EffectsModule.run(SampleEffects),
+    EffectsModule.run(NotesEffects),
     // dev environment only imports
     DEV_IMPORTS,
   ],
