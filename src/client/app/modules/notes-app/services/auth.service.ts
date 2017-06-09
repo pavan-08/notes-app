@@ -15,7 +15,7 @@ export class AuthService {
 	
 	private base_url: string      = 'https://notes-api-pavan-8.c9users.io/';
 	private client_id: number     = 2;
-	private client_secret: string = 'Jcjf8UrhnlD97RLMFFGsVuWR9HY8LXYgKMHcuRtb';
+	private client_secret: string = 'VCjjoCCRZi5TQcg8G8Q8o53lCBoM1s1oCwE3At36';
 	private accessToken: string = null;
 	private accessLife: number = null;
 
